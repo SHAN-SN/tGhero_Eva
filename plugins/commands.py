@@ -56,7 +56,7 @@ async def start(client, message):
         btn = [
             [
                 InlineKeyboardButton(
-                    "ᴊᴏɪɴ ɢʀᴏᴜᴘ", url=invite_link.invite_link ),
+                    "ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ", url=invite_link.invite_link ),
                 InlineKeyboardButton(
                     "ᴍᴇ ᴊᴏɪɴᴇᴅ", callback_data=f"checksub#{message.command[1]}")
             ]
