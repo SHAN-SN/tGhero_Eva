@@ -65,7 +65,7 @@ async def next_page(bot, query):
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"▫ {get_size(file.file_size)} ▸ {file.file_name}", callback_data=f'files#{file.file_id}'
+                    text=f"◉{get_size(file.file_size)} ▹ {file.file_name}", callback_data=f'files#{file.file_id}'
                 ),
             ]
             for file in files
@@ -104,10 +104,14 @@ async def next_page(bot, query):
              InlineKeyboardButton(f"{round(int(offset)/10)+1} - {round(total/10)}", callback_data="pages"),
              InlineKeyboardButton("ᴅᴇʟᴇᴛᴇ", callback_data="close_pages")]
         )
+        btn.append(
+            [InlineKeyboardButton(f"🤖 Cʜᴇᴄᴋ Yᴏᴜʀ Bᴏᴛ Pᴍ 🤖",url=f"https://t.me/MHProBot")]
+        )
     elif off_set is None:
         btn.append([InlineKeyboardButton("ᴘᴀɢᴇ", callback_data="pages"),
                     InlineKeyboardButton(f"{round(int(offset)/10)+1} - {round(total/10)}", callback_data="pages"),
                     InlineKeyboardButton("ɴᴇxᴛ", callback_data=f"next_{req}_{key}_{n_offset}")])
+        btn.append([InlineKeyboardButton(f"🤖 Cʜᴇᴄᴋ Yᴏᴜʀ Bᴏᴛ Pᴍ 🤖",url=f"https://t.me/MHProBot")])
     else:
         btn.append(
             [
@@ -115,6 +119,9 @@ async def next_page(bot, query):
                 InlineKeyboardButton(f"{round(int(offset)/10)+1} - {round(total/10)}", callback_data="pages"),
                 InlineKeyboardButton("ɴᴇxᴛ", callback_data=f"next_{req}_{key}_{n_offset}")
             ],
+        )
+        btn.append(
+            [InlineKeyboardButton(f"🤖 Cʜᴇᴄᴋ Yᴏᴜʀ Bᴏᴛ Pᴍ 🤖",url=f"https://t.me/MHProBot")]
         )
     try:
         await query.edit_message_reply_markup(
@@ -372,7 +379,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     caption=f_caption,
                     protect_content=True if ident == "filep" else False 
                 )
-                await query.answer('Check PM, I have sent files in pm', show_alert=True)
+                await query.answer('Check PM, I have sent files in pm\n\nഫയൽസ് നിങ്ങളുടെ Bot PM ലേക്ക് ആണ് അയച്ചിരിക്കുന്നത് താഴെ കാണുന്ന 🤖 Cʜᴇᴄᴋ Yᴏᴜʀ Bᴏᴛ Pᴍ 🤖 എന്ന ബട്ടണിൽ ക്ലിക്ക് ചെയ്യുക\n\nFiles have been sent to your bot Click on 🤖 Cʜᴇᴄᴋ Yᴏᴜʀ Bᴏᴛ Pᴍ 🤖 button below', show_alert=True)
         except UserIsBlocked:
             await query.answer('Unblock the bot mahn !', show_alert=True)
         except PeerIdInvalid:
@@ -470,8 +477,11 @@ async def cb_handler(client: Client, query: CallbackQuery):
         except:
             pass
     elif query.data == "malspell":
-        btn = [[
+         btn = [[
             InlineKeyboardButton('🔍 ɢᴏᴏɢʟᴇ 🔎', url=f'https://google.com/search?q='),
+            InlineKeyboardButton('🔍 ɪᴍᴅʙ 🔎', url=f'https://imdb.com/search?q=')
+        ],[
+            InlineKeyboardButton(' 🔍 ᴡɪᴋɪᴘᴇᴅɪᴀ 🔎', url=f'https://en.m.wikipedia.org/w/index.php?search='),
             InlineKeyboardButton(' 🔍 ʏᴀɴᴅᴇx 🔎', url=f'https://yandex.com/search?text=')
         ],[
             InlineKeyboardButton("🇺🇸 ᴛʀᴀɴsʟᴀᴛᴇ ᴛᴏ ᴇɴɢʟɪꜱʜ 🇺🇸", callback_data="engspell")
@@ -479,11 +489,14 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.message.edit_text(script.SPELL_CHECK_MAL, reply_markup=InlineKeyboardMarkup(btn))
     elif query.data == "engspell":
         btn = [[
-            InlineKeyboardButton('🔍 ɢᴏᴏɢʟᴇ 🔎', url=f'https://google.com/search?q='),
+            InlineKeyboardButton('🔍 ɢᴏᴏɢʟᴇ 🔎', url=f'https://google.com/'),
+            InlineKeyboardButton('🔍 ɪᴍᴅʙ 🔎', url=f'https://imdb.com/search?q=')
+        ],[
+            InlineKeyboardButton(' 🔍 ᴡɪᴋɪᴘᴇᴅɪᴀ 🔎', url=f'https://en.m.wikipedia.org/w/index.php?search='),
             InlineKeyboardButton(' 🔍 ʏᴀɴᴅᴇx 🔎', url=f'https://yandex.com/')
         ],[
             InlineKeyboardButton("🇮🇳 ᴛʀᴀɴsʟᴀᴛᴇ ᴛᴏ ᴍᴀʟᴀʏᴀʟᴀᴍ 🇮🇳", callback_data="malspell")
-        ]] 
+        ]]
         await query.message.edit_text(script.SPELL_CHECK_ENG, reply_markup=InlineKeyboardMarkup(btn))
     elif query.data == "button":
         buttons = [[
@@ -690,9 +703,15 @@ async def auto_filter(client, msg, spoll=False):
         btn.append(
             [InlineKeyboardButton("ᴘᴀɢᴇ", callback_data="pages"),InlineKeyboardButton(text=f"1 - {round(int(total_results)/10)}", callback_data="pages"), InlineKeyboardButton(text="ɴᴇxᴛ", callback_data=f"next_{req}_{key}_{offset}")]
         )
+        btn.append(
+            [InlineKeyboardButton(f"🤖 Cʜᴇᴄᴋ Yᴏᴜʀ Bᴏᴛ Pᴍ 🤖",url=f"https://t.me/MHProBot")]
+        )
     else:
         btn.append(
             [InlineKeyboardButton(text="ᴍᴏʀᴇ ᴘᴀɢᴇ ɴᴏᴛ ᴀᴠᴀɪʟᴀʙʟᴇ", callback_data="pages")]
+        )
+        btn.append(
+            [InlineKeyboardButton(f"🤖 Cʜᴇᴄᴋ Yᴏᴜʀ Bᴏᴛ Pᴍ 🤖",url=f"https://t.me/MHProBot")]
         )
     imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
     TEMPLATE = settings['template']
@@ -733,25 +752,25 @@ async def auto_filter(client, msg, spoll=False):
     if imdb and imdb.get('poster'):
         try:
             hehe = await message.reply_photo(photo=imdb.get('poster'), caption=cap, reply_markup=InlineKeyboardMarkup(btn))
-            await asyncio.sleep(600)
+            await asyncio.sleep(300)
             await hehe.delete()
             await message.delete()
         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
             pic = imdb.get('poster')
             poster = pic.replace('.jpg', "._V1_UX360.jpg")
             hmm = await message.reply_photo(photo=poster, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
-            await asyncio.sleep(600)
+            await asyncio.sleep(300)
             await hmm.delete()
             await message.delete()
         except Exception as e:
             logger.exception(e)
             fek = await message.reply_photo(photo=NOR_IMG, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
-            await asyncio.sleep(600)
+            await asyncio.sleep(300)
             await fek.delete()
             await message.delete()
     else:
         fuk = await message.reply_photo(photo=NOR_IMG, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
-        await asyncio.sleep(600)
+        await asyncio.sleep(300)
         await fuk.delete()
         await message.delete()
     if spoll:
@@ -774,7 +793,7 @@ async def advantage_spell_chok(msg):
             InlineKeyboardButton("🇮🇳 ᴛʀᴀɴsʟᴀᴛᴇ ᴛᴏ ᴍᴀʟᴀʏᴀʟᴀᴍ 🇮🇳", callback_data="malspell")
         ]]        
         k=await msg.reply_photo(photo="https://telegra.ph/file/4bb1968bd091453b0070c.jpg", caption=script.SPELL_CHECK_ENG, reply_markup=InlineKeyboardMarkup(btn))    
-        await asyncio.sleep(30)
+        await asyncio.sleep(40)
         await k.delete()
         await msg.delete()
         return
@@ -810,12 +829,15 @@ async def advantage_spell_chok(msg):
     SPELL_CHECK[msg.message_id] = movielist
     btn = [[
         InlineKeyboardButton('🔍 ɢᴏᴏɢʟᴇ 🔎', url=f'https://google.com/search?q='),
-        InlineKeyboardButton(' 🔍 ʏᴀɴᴅᴇx 🔎', url=f'https://yandex.com/search?text=')
+        InlineKeyboardButton('🔍 ɪᴍᴅʙ 🔎', url=f'https://imdb.com/search?q=')
+    ],[
+        InlineKeyboardButton('🔍 ᴡɪᴋɪᴘᴇᴅɪᴀ 🔎', url=f'https://en.m.wikipedia.org/w/index.php?search='),
+        InlineKeyboardButton('🔍 ʏᴀɴᴅᴇx 🔎', url=f'https://yandex.com/search?text=')
     ],[
         InlineKeyboardButton("🇮🇳 ᴛʀᴀɴsʟᴀᴛᴇ ᴛᴏ ᴍᴀʟᴀʏᴀʟᴀᴍ 🇮🇳", callback_data="malspell")
     ]]
     k=await msg.reply_photo(photo="https://telegra.ph/file/4bb1968bd091453b0070c.jpg", caption=script.SPELL_CHECK_ENG, reply_markup=InlineKeyboardMarkup(btn))    
-    await asyncio.sleep(40)
+    await asyncio.sleep(60)
     await k.delete()
     await msg.delete()
     return
