@@ -62,8 +62,7 @@ async def start(client, message):
             ]
         ]
 
-        if message.command[1] != "subscribe":
-            try:
+        if message.command[1] != "subscribed
             	btn.append([InlineKeyboardButton("Hᴇʏ Bᴏᴛ....! Wʜʏ I'ᴍ ᴊᴏɪɴɪɴɢ", callback_data="neosub")])
         await client.send_message(
             chat_id=message.from_user.id,
