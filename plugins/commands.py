@@ -69,7 +69,7 @@ async def start(client, message):
             chat_id=message.from_user.id,
             text="⚠️ ᴘʟᴇᴀsᴇ ғᴏʟʟᴏᴡ ᴛʜɪs ʀᴜʟᴇs ⚠️</b>\n\n<b>{} ആദ്യം【 <a href=https://t.me/MoviesHub_Updates>ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ</a> 】എന്ന ബട്ടൺ ക്ലിക്ക് ചെയ്തു ഗ്രൂപ്പിൽ ജോയിൻ ചെയ്.. എന്നിട്ട് വീണ്ടു ബോട്ടിൽ വന്നിട്ട്【 <a href=https://t.me/MHProBot>ᴍᴇ ᴊᴏɪɴᴇᴅ</a> 】എന്ന ബട്ടൺ ക്ലിക്ക് ചെയ്താൽ ഫയൽ കിട്ടുന്നതായിരിക്കും</b>\n\n<b>Fɪʀsᴛ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ【 <a href=https://t.me/MoviesHub_Updates>ᴊᴏɪɴ ɢʀᴏᴜᴘ</a> 】ʙᴜᴛᴛᴏɴ ᴀɴᴅ ᴊᴏɪɴ ᴛʜᴇ ᴄʜᴀɴɴᴇʟ. ᴛʜᴇɴ ᴄᴏᴍᴇ ʙᴀᴄᴋ ᴛᴏ ᴛʜᴇ ʙᴏᴛ ᴄʟɪᴄᴋ ᴏɴ【 <a href=https://t.me/MHProBot>ᴍᴇ ᴊᴏɪɴᴇᴅ</a> 】ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ᴛʜᴇ ғɪʟᴇ...",
             reply_markup=InlineKeyboardMarkup(btn),
-            parse_mode="html"
+            parse_mode="markdown"
             )
         return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
